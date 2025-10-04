@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UsuarioRequest { // Finalidade: Receber os dados para criar um novo usuário.
+public class UsuarioRequestDto { // Finalidade: Receber os dados para criar um novo usuário.
 
   // Request: Representa os dados enviados para uma API
 
