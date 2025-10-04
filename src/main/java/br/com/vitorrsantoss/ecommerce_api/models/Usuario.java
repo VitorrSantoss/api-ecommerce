@@ -9,6 +9,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -65,9 +67,11 @@ public class Usuario {
   @Column(nullable = false, name = "TELEFONE", unique = true)
   private String telefone;
 
+  // ----- O 'role' representando o papel do usuário no sistema. ----- //
+  @Enumerated(EnumType.STRING)              // Banco de dados irá salvar o NOME da role ("ROLE_ADMIN") em vez de um número (0, 1).
+  private Role role;
 
   // ----- Relacionamento: "um para muitos" ----- //
-
   @OneToMany
   private List<Endereco> enderecos;
   
