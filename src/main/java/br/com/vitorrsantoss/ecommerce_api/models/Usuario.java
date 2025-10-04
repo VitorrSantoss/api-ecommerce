@@ -38,7 +38,7 @@ public class Usuario {
   private String email;
 
   @NotBlank(message = "Campo senha é obrigatório")
-  @Size(min = 6, max = 12, message = "SENHA DEVE TER ENTRE 6 E 12 CARACTERES")    // validação do tamanho/comprimento de uma String
+  @Size(min = 6, max = 12, message = "Senha deve ter entre 6 e 12 caracteres")    // validação do tamanho/comprimento de uma String
   @JsonIgnore                                                                     // validação para nunca expor a senha nas resposta da API
   @Column(nullable = false) 
   private String senha;
