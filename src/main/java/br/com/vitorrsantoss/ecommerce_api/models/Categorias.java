@@ -1,8 +1,10 @@
 package br.com.vitorrsantoss.ecommerce_api.models;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -16,6 +18,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity(name = "tb_categorias")
 public class Categorias {
 
   @Id
@@ -36,9 +39,9 @@ public class Categorias {
   @NotNull(message = "Campo atualização obrigatório")
   @Column(nullable = false, name = "ATUALIZAÇÃO")
   private LocalDateTime atualizacao;
-  
-  // ----- RELACIONAMENTOS ----- // 
+
+  // ----- RELACIONAMENTOS ----- //
   @OneToMany
-  private Produtos produtos;
+  private List<Produtos> produtos;
 
 }

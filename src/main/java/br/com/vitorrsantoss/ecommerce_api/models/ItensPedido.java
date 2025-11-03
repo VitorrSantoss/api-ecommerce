@@ -40,15 +40,14 @@ public class ItensPedido {
   @Column(nullable = false, name = "ATUALIZAÇÃO")
   private LocalDateTime atualizacao;
 
-
   // ----- RELACIONAMENTOS ----- //
 
   @ManyToOne
   @JoinColumn(name = "pedido_id")
-  private Pedidos pedidoId;
+  private Pedidos pedido;
 
   @ManyToOne
   @JoinColumn(name = "produto_id")
-  private Produtos produtoId;
-  
+  private Produtos produto;
+
 }

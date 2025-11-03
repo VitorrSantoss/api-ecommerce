@@ -15,6 +15,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -24,25 +25,26 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data                                                                           // Getter's and Setter's
+@Data // Getter's and Setter's
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name= "tb_usuarios")
+@Entity(name = "tb_usuarios")
 public class Usuario {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @NotBlank(message = "Campo email é obrigatório")                                // validação há nível de requisição: registro não pode ser nulo
-  @Email                                                                          // 
-  @Column(nullable = false, name = "EMAIL", unique = true)                        // configuração da coluna no banco de dados
+  @NotBlank(message = "Campo email é obrigatório") // validação há nível de requisição: registro não pode ser nulo
+  @Email //
+  @Column(nullable = false, name = "EMAIL", unique = true) // configuração da coluna no banco de dados
   private String email;
 
   @NotBlank(message = "Campo senha é obrigatório")
-  @Size(min = 6, max = 12, message = "Senha deve ter entre 6 e 12 caracteres")    // validação do tamanho/comprimento de uma String
-  @JsonIgnore                                                                     // validação para nunca expor a senha nas resposta da API
-  @Column(nullable = false) 
+  @Size(min = 6, max = 12, message = "Senha deve ter entre 6 e 12 caracteres") // validação do tamanho/comprimento de
+                                                                               // uma String
+  @JsonIgnore // validação para nunca expor a senha nas resposta da API
+  @Column(nullable = false)
   private String senha;
 
   @NotNull(message = "Campo status é obrigatório")
@@ -50,7 +52,7 @@ public class Usuario {
   private Boolean ativo;
 
   @NotBlank(message = "Campo cpf é obrigatório")
-  @CPF(message = "CPF inválido")                                                  // validação se uma String contém um CPF segundo as regras brasileiras
+  @CPF(message = "CPF inválido") // validação se uma String contém um CPF segundo as regras brasileiras
   @Column(nullable = false, name = "CPF", unique = true)
   private String cpf;
 
@@ -59,7 +61,7 @@ public class Usuario {
   private String nomeCompleto;
 
   @NotNull(message = "Campo data_nascimento é obrigatório")
-  @Past(message = "Data de Nascimento deve está no passado")                       // validação de data/hora que está no passado 
+  @Past(message = "Data de Nascimento deve está no passado") // validação de data/hora que está no passado
   @Column(nullable = false, name = "DATA_NASCIMENTO")
   private LocalDate dataNascimento;
 
@@ -68,12 +70,18 @@ public class Usuario {
   private String telefone;
 
   // ----- O 'role' representando o papel do usuário no sistema. ----- //
-  @Enumerated(EnumType.STRING)              // Banco de dados irá salvar o NOME da role ("ROLE_ADMIN") em vez de um número (0, 1).
+  @Enumerated(EnumType.STRING) // Banco de dados irá salvar o NOME da role ("ROLE_ADMIN") em vez de um número
+                               // (0, 1).
   private Role role;
 
   // ----- Relacionamento: "um para muitos" ----- //
   @OneToMany
   private List<Endereco> enderecos;
-  
-  
+
+  @OneToOne
+  private Carrinho carrinho;
+
+  @OneToMany
+  private List<Pedidos> pedidos;
+
 }

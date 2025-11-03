@@ -1,6 +1,7 @@
 package br.com.vitorrsantoss.ecommerce_api.models;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import br.com.vitorrsantoss.ecommerce_api.constants.StatusPedido;
 import jakarta.persistence.Column;
@@ -30,7 +31,7 @@ public class Pedidos {
   @NotNull(message = "Campo valor_total é obrigatório")
   @Column(nullable = false, name = "VALOR_TOTAL")
   private double valorTotal;
-  
+
   @NotNull(message = "Campo status é obrigatório")
   @Column(nullable = false, name = "STATUS")
   private StatusPedido status;
@@ -53,13 +54,13 @@ public class Pedidos {
   // ----- Relacionamentos ----- //
   @ManyToOne
   @JoinColumn(name = "usuario_id")
-  private Usuario usuarioId;
+  private Usuario usuario;
 
   @ManyToOne
   @JoinColumn(name = "endereço_id")
-  private Endereco enderecoId;
+  private Endereco enderecoEntrega;
 
   @OneToMany
-  private ItensPedido itensPedido;
-  
+  private List<ItensPedido> itens;
+
 }

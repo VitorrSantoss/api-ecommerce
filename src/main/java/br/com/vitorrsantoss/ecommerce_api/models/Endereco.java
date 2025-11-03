@@ -1,5 +1,7 @@
 package br.com.vitorrsantoss.ecommerce_api.models;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -7,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -23,8 +26,8 @@ public class Endereco {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-
-  // ----- Dados que será preenchido pelo ViaCEP e confirmados pelo Usuário ----- //
+  // ----- Dados que será preenchido pelo ViaCEP e confirmados pelo Usuário -----
+  // //
 
   @NotBlank(message = "Campo CEP é obrigatório")
   @Column(nullable = false, name = "CEP")
@@ -67,5 +70,7 @@ public class Endereco {
   @JoinColumn(name = "usuario_id")
   private Usuario usuario;
 
+  @OneToMany
+  private List<Pedidos> pedidos;
 
 }
